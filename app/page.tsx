@@ -12,10 +12,14 @@ const DynamicHome = () => {
       <h2 className="text-[48px] mt-[4rem] bg-gradient-to-r from-[#54F9E5] to-[#0074FB] text-transparent bg-clip-text">
         Find Suitable Location of Your Company
       </h2>
-      <DynamicMap />
+
+      {/* Map */}
+      <div className="mt-[4rem]">
+        <DynamicMap />
+      </div>
 
       {/* Table */}
-      <div className="w-full px-[5rem]">
+      <div className="w-full px-[5rem] mt-[4rem]">
         <Table />
       </div>
     </div>

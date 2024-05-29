@@ -7,31 +7,31 @@ import { Marker } from "react-leaflet/Marker";
 import { Users, getUsers } from "@/utils/apis";
 
 const Map = () => {
-  const [markers, setMarkers]= useState<Users[]>([])
-  const [popups, setPopups] = useState<Users[]>([])
+  const [markers, setMarkers] = useState<Users[]>([]);
+  const [popups, setPopups] = useState<Users[]>([]);
 
- async function fetchMarker() {
+  async function fetchMarker() {
     try {
-      const result = await getUsers()
-      setMarkers(result.result)
+      const result = await getUsers();
+      setMarkers(result.result);
     } catch (error: any) {
       console.error("Error fetching markers:", error);
     }
- }
+  }
 
- async function fetchPopup() {
+  async function fetchPopup() {
     try {
-      const result = await getUsers()
-      setPopups(result.result)
+      const result = await getUsers();
+      setPopups(result.result);
     } catch (error: any) {
-      console.error("Error fetching popupsL:", error)
+      console.error("Error fetching popupsL:", error);
     }
- }
+  }
 
   useEffect(() => {
-    fetchMarker()
-    fetchPopup()
-  },[])
+    fetchMarker();
+    fetchPopup();
+  }, []);
 
   return (
     <div id="map">
@@ -39,13 +39,12 @@ const Map = () => {
         center={[51.505, -0.09]}
         zoom={13}
         scrollWheelZoom={false}
-        style={{height:'100vh', width:'150vh'}}
+        style={{ height: "50vh", width: "150vh" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
         // mapping marker
         {/* {markers.map((marker) => {          
           <Marker 
@@ -53,9 +52,7 @@ const Map = () => {
           position={marker.address.geo.lat, marker.address.geo.lng}
           />
         })} */}
-
         // mapping popup
-
         <Marker position={[51.505, -0.09]}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.

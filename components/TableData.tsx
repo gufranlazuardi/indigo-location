@@ -1,66 +1,32 @@
-"use client"
+"use client";
 
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Users } from "@/utils/apis";
-import { useState } from "react";
-
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
+import axiosWithConfig from "@/utils/axiosWithConfig";
+import { useEffect, useState } from "react";
 
 const TableData = () => {
+  const [data, setData] = useState<Users[]>([]);
 
-  const [data, setData] = useState<Users[]>([])
+  async function fetchTable() {
+    try {
+      const response = await axiosWithConfig("/users");
+      setData(response.data);
+    } catch (error: any) {
+      console.error("Error fetching table: ", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchTable();
+  }, []);
 
   return (
     <Table>
@@ -71,23 +37,22 @@ const TableData = () => {
           <TableHead>Username</TableHead>
           <TableHead>Email</TableHead>
           <TableHead>City</TableHead>
+          <TableHead>Website</TableHead>
         </TableRow>
       </TableHeader>
-      {/* <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">
-              {invoice.invoice}
-            </TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">
-              {invoice.totalAmount}
-            </TableCell>
+
+      <TableBody>
+        {data.map((datas) => (
+          <TableRow key={datas.id}>
+            <TableCell>{datas.id}</TableCell>
+            <TableCell>{datas.name}</TableCell>
+            <TableCell>{datas.username}</TableCell>
+            <TableCell>{datas.email}</TableCell>
+            <TableCell>{datas.address.city}</TableCell>
+            <TableCell>{datas.website}</TableCell>
           </TableRow>
         ))}
-      </TableBody> */}
-      
+      </TableBody>
     </Table>
   );
 };

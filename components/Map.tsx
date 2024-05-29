@@ -20,18 +20,8 @@ const Map = () => {
     }
   }
 
-  async function fetchPopup() {
-    try {
-      const response = await axiosWithConfig("/users");
-      setPopups(response.data);
-    } catch (error: any) {
-      console.error("Error fetching popupsL:", error);
-    }
-  }
-
   useEffect(() => {
     fetchMarker();
-    fetchPopup();
   }, []);
 
   return (
@@ -58,9 +48,8 @@ const Map = () => {
             ]}
           >
             {/* mapping popup */}
-            {popups.map((popup) => (
-              <Popup key={popup.id}>{popup.address.city}</Popup>
-            ))}
+
+            <Popup>{marker.address.city}</Popup>
           </Marker>
         ))}
       </MapContainer>

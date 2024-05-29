@@ -6,6 +6,9 @@ import { Popup } from "react-leaflet/Popup";
 import { Marker } from "react-leaflet/Marker";
 import { Users } from "@/utils/apis";
 import axiosWithConfig from "@/utils/axiosWithConfig";
+import "leaflet/dist/leaflet.css";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
+import "leaflet-defaulticon-compatibility";
 
 const Map = () => {
   const [markers, setMarkers] = useState<Users[]>([]);
@@ -43,8 +46,8 @@ const Map = () => {
           <Marker
             key={marker.id}
             position={[
-              marker.address.geo.lng,
               marker.address.geo.lat,
+              marker.address.geo.lng,
             ]}
           >
             {/* mapping popup */}

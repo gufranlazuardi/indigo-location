@@ -5,7 +5,6 @@ import Head from "next/head";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "../utils/providers/theme-provider";
-import 'leaflet/dist/leaflet.css'
 
 const inter = Inter({ subsets: ["latin"] });
 

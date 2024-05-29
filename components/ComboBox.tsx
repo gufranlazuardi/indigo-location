@@ -11,12 +11,14 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Link from "next/link";
 
 const frameworks = [
   {
@@ -67,26 +69,33 @@ const ComboBox = () => {
           <CommandInput placeholder="Search framework..." />
           <CommandEmpty>No framework found.</CommandEmpty>
           <CommandGroup>
-            {frameworks.map((framework) => (
-              <CommandItem
-                key={framework.value}
-                value={framework.value}
-                onSelect={(currentValue) => {
-                  setValue(
-                    currentValue === value ? "" : currentValue
-                  );
-                  setOpen(false);
-                }}
-              >
-                <Check
-                  className={cn("mr-2 h-4 w-4", {
-                    "opacity-100": value === framework.value,
-                    "opacity-0": value !== framework.value,
-                  })}
-                />
-                {framework.label}
-              </CommandItem>
-            ))}
+            <CommandList>
+              {frameworks.map((framework) => (
+                <Link
+                  key={framework.value}
+                  href={`/users/${framework.value}`}
+                >
+                  <CommandItem
+                    key={framework.value}
+                    value={framework.value}
+                    onSelect={(currentValue) => {
+                      setValue(
+                        currentValue === value ? "" : currentValue
+                      );
+                      setOpen(false);
+                    }}
+                  >
+                    <Check
+                      className={cn("mr-2 h-4 w-4", {
+                        "opacity-100": value === framework.value,
+                        "opacity-0": value !== framework.value,
+                      })}
+                    />
+                    {framework.label}
+                  </CommandItem>
+                </Link>
+              ))}
+            </CommandList>
           </CommandGroup>
         </Command>
       </PopoverContent>

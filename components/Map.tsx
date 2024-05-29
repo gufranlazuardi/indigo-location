@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Popup } from "react-leaflet/Popup";
 import { Marker } from "react-leaflet/Marker";
-import { Users, getUsers } from "@/utils/apis";
+import { Users } from "@/utils/apis";
+import axiosWithConfig from "@/utils/axiosWithConfig";
 
 const Map = () => {
   const [markers, setMarkers] = useState<Users[]>([]);
@@ -12,8 +13,8 @@ const Map = () => {
 
   async function fetchMarker() {
     try {
-      const result = await getUsers();
-      setMarkers(result.result);
+      const response = await axiosWithConfig("/users");
+      setMarkers(response.data);
     } catch (error: any) {
       console.error("Error fetching markers:", error);
     }
@@ -21,8 +22,8 @@ const Map = () => {
 
   async function fetchPopup() {
     try {
-      const result = await getUsers();
-      setPopups(result.result);
+      const response = await axiosWithConfig("/users");
+      setPopups(response.data);
     } catch (error: any) {
       console.error("Error fetching popupsL:", error);
     }
@@ -37,27 +38,31 @@ const Map = () => {
     <div id="map">
       <MapContainer
         center={[51.505, -0.09]}
-        zoom={13}
+        zoom={5}
         scrollWheelZoom={false}
+        zoomControl={true}
         style={{ height: "50vh", width: "150vh" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        // mapping marker
-        {/* {markers.map((marker) => {          
-          <Marker 
-          key={marker.id} 
-          position={marker.address.geo.lat, marker.address.geo.lng}
-          />
-        })} */}
-        // mapping popup
-        <Marker position={[51.505, -0.09]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+
+        {/* mapping marker */}
+        {markers.map((marker) => (
+          <Marker
+            key={marker.id}
+            position={[
+              marker.address.geo.lng,
+              marker.address.geo.lat,
+            ]}
+          >
+            {/* mapping popup */}
+            {popups.map((popup) => (
+              <Popup key={popup.id}>{popup.address.city}</Popup>
+            ))}
+          </Marker>
+        ))}
       </MapContainer>
     </div>
   );

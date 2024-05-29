@@ -32,7 +32,7 @@ const TableData = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">No</TableHead>
+          <TableHead>No</TableHead>
           <TableHead>Name</TableHead>
           <TableHead>Username</TableHead>
           <TableHead>Email</TableHead>

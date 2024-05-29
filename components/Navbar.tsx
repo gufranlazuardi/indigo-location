@@ -15,7 +15,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="flex justify-between sticky z-0">
+    <div className="flex justify-between items-center sticky top-0 z-50 p-4 bg-transparent bg-opacity-50 blur-background">
       <Link href="/">
         <h1 className="text-2xl bg-gradient-to-r font-bold from-[#54F9E5] to-[#0074FB] text-transparent bg-clip-text cursor-pointer">
           Indigo Location

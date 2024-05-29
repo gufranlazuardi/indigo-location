@@ -12,7 +12,6 @@ import "leaflet-defaulticon-compatibility";
 
 const Map = () => {
   const [markers, setMarkers] = useState<Users[]>([]);
-  const [popups, setPopups] = useState<Users[]>([]);
 
   async function fetchMarker() {
     try {
@@ -31,7 +30,7 @@ const Map = () => {
     <div id="map">
       <MapContainer
         center={[51.505, -0.09]}
-        zoom={5}
+        zoom={2}
         scrollWheelZoom={false}
         zoomControl={true}
         style={{ height: "50vh", width: "150vh" }}

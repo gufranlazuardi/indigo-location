@@ -14,19 +14,31 @@ Indigo Location is a web application designed to help users find and explore cit
 - **React Leaflet**: Integrates interactive maps.
 - **Tailwind CSS**: Provides utility-first CSS framework for styling.
 
-## Getting Started
+## Clone the project
 
-First, run the development server:
+```bash
+git clone https://github.com/gufranlazuardi/indigo-location
+```
+
+Go to the project directory
+
+```bash
+cd indigo-location
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start the server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+
+## Screenshots
 
 <img width="1440" alt="Screen Shot 2024-06-03 at 22 01 57" src="https://github.com/gufranlazuardi/indigo-location/assets/127754894/8001e1e4-4c7f-4938-a03d-f8ca67677b37">
 

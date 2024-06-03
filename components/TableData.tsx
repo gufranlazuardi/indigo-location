@@ -37,7 +37,7 @@ const TableData = () => {
   });
 
   return (
-    <div className="flex flex-col pb-[5rem]">
+    <div className="flex flex-col h-[30rem] pb-[5rem]">
       <Input
         type="text"
         placeholder="Search city..."
@@ -45,31 +45,33 @@ const TableData = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
         className="mb-4 w-[20rem] p-2 border border-gray-300 rounded"
       />
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>No</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Username</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>City</TableHead>
-            <TableHead>Website</TableHead>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {filteredData.map((datas) => (
-            <TableRow key={datas.id}>
-              <TableCell>{datas.id}</TableCell>
-              <TableCell>{datas.name}</TableCell>
-              <TableCell>{datas.username}</TableCell>
-              <TableCell>{datas.email}</TableCell>
-              <TableCell>{datas.address.city}</TableCell>
-              <TableCell>{datas.website}</TableCell>
+      <div className="border overflow-auto">
+        <Table className="h-[10rem]">
+          <TableHeader>
+            <TableRow>
+              <TableHead>No</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Username</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>City</TableHead>
+              <TableHead>Website</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+
+          <TableBody>
+            {filteredData.map((datas) => (
+              <TableRow key={datas.id}>
+                <TableCell>{datas.id}</TableCell>
+                <TableCell>{datas.name}</TableCell>
+                <TableCell>{datas.username}</TableCell>
+                <TableCell>{datas.email}</TableCell>
+                <TableCell>{datas.address.city}</TableCell>
+                <TableCell>{datas.website}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };
